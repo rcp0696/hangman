@@ -30,12 +30,11 @@ while not found and lives > 0:
                 for char in word:
                     if char in lettersguessed:
                         # Index of letter guessed in the final word
-                        ind = word.index(userguess)
-                        var = var[:ind] + userguess + var[ind + 1:]
-                        if word.count(userguess) > 1:
-                            for i in range(1, word.count(userguess)):
-                                ind = word.index(userguess)
-                                var = var[:ind] + userguess + var[ind + 1:]
+                        def find(s, ch):
+                            return [i for i, ltr in enumerate(s) if ltr == ch]
+                        index = find(word, userguess)
+                        for ind in index:
+                            var = var[:ind] + userguess + var[ind + 1:]
             else:
                 lives -= 1
                 print("Wrong guess mate")
@@ -43,6 +42,8 @@ while not found and lives > 0:
             if var == word:
                 print("You Won! Well Done.")
                 found = True
+        else:
+            lives -= 1
 
     else:
         print("Please enter letters only")
